@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery.min.js"></script>
+
+</head>
+<body>
+    <div id="wrapper">
+        <div id="errorMessage"></div>
+        <div id="success"></div>
+        <div class="email form-element">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="eg.xyz12@gmail.com">
+        </div>
+
+        <div class="password form-element">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="minimum 6 digits">
+        </div>
+
+        <div class="form-element">
+            <input type="submit" id="submitButton" value="Sign Up">
+        </div>
+    </div>
+ 
+    <script>
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+        $("#submitButton").click(function(){
+            let errorMessage = "";
+            let fieldsMissing = "";
+            if($("#email").val() == ""){
+                fieldsMissing += "<br>Email";
+            }
+            if($("#password").val() == ""){
+                fieldsMissing += "<br>Password";
+            }
+            
+            if(fieldsMissing != ""){
+                errorMessage += "The following field(s) are missing <br>" + fieldsMissing;
+            }
+            if(isEmail($("#email").val()) ==false){
+                errorMessage += "<p>Your email address is not valid </p>";
+            }
+            if($("#password").val().trim().length < 6){
+                errorMessage += "<p>Your password is too short</p>";
+            }
+            if(errorMessage != ""){
+                $("#errorMessage").html(errorMessage);
+            }
+            else{
+                $("#success").html("Login successfully");
+                $("$errorMessage").hide();
+            }
+        });
+    </script>
+</body>
+</html>
